@@ -13,8 +13,6 @@ const get = async (event) => {
       .eq('id', Number(id))
       .single()
 
-    console.log('RESTAURANT GET DATA', data)
-
     return data
   } catch (err) {
     console.error(err)
@@ -29,8 +27,6 @@ const get = async (event) => {
 const post = async (event) => {
   const body = await readBody(event)
   const { name, description } = body
-
-  console.log('RESTAURANT POST', body)
 
   try {
     const { data, error } = await supabase
@@ -66,8 +62,6 @@ const post = async (event) => {
 const put = async (event) => {
   const body = await readBody(event)
   const { id, name, description } = body
-
-  console.log('RESTAURANT PUT', body)
 
   try {
     const { data, error } = await supabase

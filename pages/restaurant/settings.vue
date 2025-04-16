@@ -46,7 +46,6 @@ const updateRestaurant = async () => {
     return
   }
 
-  console.log('updateRestaurant', restaurantCopy.value)
   loading.value = true
   const result = await restaurantStore.updateRestaurant(restaurantCopy.value)
   if (!result) {

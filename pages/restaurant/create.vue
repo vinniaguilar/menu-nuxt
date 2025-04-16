@@ -40,7 +40,6 @@ const createRestaurant = async () => {
     return
   }
 
-  console.log('createRestaurant', restaurantObj)
   loading.value = true
   const result = await restaurantStore.createRestaurant(restaurantObj)
   if (!result) {
