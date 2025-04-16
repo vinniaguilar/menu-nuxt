@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/eslint',
     'shadcn-nuxt',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@pinia/nuxt'
   ],
   css: ['~/assets/css/tailwind.css'],
   vite: {

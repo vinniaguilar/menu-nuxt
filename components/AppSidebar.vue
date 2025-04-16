@@ -15,7 +15,7 @@ const items = [
   },
   {
     title: 'Configurações',
-    url: '/settings',
+    url: '/restaurant/settings',
     icon: Settings
   }
 ]
