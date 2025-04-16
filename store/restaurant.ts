@@ -1,11 +1,9 @@
 export const useRestaurantStore = defineStore('restaurant', {
   state: () => ({
     restaurant: {
-      id: 7,
-      name: 'Teste Aguilar',
-      description: 'Teste Aguilar',
-      logo_url: null,
-      created_at: '2025-04-16T05:28:00.221935+00:00'
+      name: '',
+      description: '',
+      logo_url: null
     }
   }),
   actions: {

@@ -9,10 +9,10 @@ div.grid.grid-cols-12
     div
       .mt-8
         Label Nome do restaurante*
-        Input(v-model="restaurantCopy.name" type="text" placeholder="Nome do restaurante" class="w-full mt-1")
+        Input(v-model="restaurantStore.restaurant.name" type="text" placeholder="Nome do restaurante" class="w-full mt-1")
       .mt-8
         Label Descrição do restaurante*
-        Textarea(v-model="restaurantCopy.description" type="text" placeholder="Descrição do restaurante" class="w-full mt-1")
+        Textarea(v-model="restaurantStore.restaurant.description" type="text" placeholder="Descrição do restaurante" class="w-full mt-1")
     div
       Button(type="submit" class="w-full mt-8" @click="updateRestaurant()")
         Loader2(class="w-4 h-4 mr-2 animate-spin" v-if="loading") 
@@ -27,27 +27,23 @@ import { Loader2 } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 const restaurantStore = useRestaurantStore()
 
-onMounted(() => {
-  restaurantCopy.value = { ...restaurantStore.restaurant }
-})
-
-const restaurantCopy = ref({
-  name: '',
-  description: ''
-})
-
 const loading = ref(false)
 const hasError = ref(false)
 
 const updateRestaurant = async () => {
   hasError.value = false
-  if (!restaurantCopy.value.name || !restaurantCopy.value.description) {
+
+  const restaurantCopy = {
+    ...restaurantStore.restaurant
+  }
+
+  if (!restaurantCopy.name || !restaurantCopy.description) {
     hasError.value = true
     return
   }
 
   loading.value = true
-  const result = await restaurantStore.updateRestaurant(restaurantCopy.value)
+  const result = await restaurantStore.updateRestaurant(restaurantCopy)
   if (!result) {
     hasError.value = true
     loading.value = false
