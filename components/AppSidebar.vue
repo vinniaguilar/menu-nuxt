@@ -10,7 +10,7 @@ const items = [
   },
   {
     title: 'Cardápio',
-    url: '/menu',
+    url: '/restaurant/menu',
     icon: SquareMenu
   },
   {

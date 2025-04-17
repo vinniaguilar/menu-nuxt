@@ -1,6 +1,9 @@
+import { useMenuStore } from './menu'
+
 export const useRestaurantStore = defineStore('restaurant', {
   state: () => ({
     restaurant: {
+      id: null,
       name: '',
       description: '',
       logo_url: null
@@ -8,6 +11,7 @@ export const useRestaurantStore = defineStore('restaurant', {
   }),
   actions: {
     async getRestaurant() {
+      const menuStore = useMenuStore()
       const data = await $fetch('/api/restaurant', {
         method: 'GET',
         params: {
@@ -15,6 +19,8 @@ export const useRestaurantStore = defineStore('restaurant', {
         }
       })
       this.restaurant = data
+      menuStore.fetchCategories()
+      // menuStore.fetchDishes()
       return data
     },
     async createRestaurant(restaurant: {
