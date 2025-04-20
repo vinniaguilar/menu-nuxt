@@ -1,10 +1,7 @@
 <template lang="pug">
+div
   Toaster(richColors)
-  SidebarProvider
-    AppSidebar
-    main
-      SidebarTrigger
-      NuxtPage.m-8
+  NuxtLayout
 </template>
 
 <script setup lang="ts">

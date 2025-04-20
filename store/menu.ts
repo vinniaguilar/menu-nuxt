@@ -68,6 +68,7 @@ export const useMenuStore = defineStore('menu', {
       name: string
       description: string
       price: number
+      image: string
       category_id: number
     }) {
       const restaurantStore = useRestaurantStore()
@@ -75,6 +76,7 @@ export const useMenuStore = defineStore('menu', {
 
       const payload = {
         restaurant_id: restaurantId,
+        image_url: dish.image,
         ...dish
       }
 

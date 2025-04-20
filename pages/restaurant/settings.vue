@@ -1,6 +1,6 @@
 <template lang="pug">
 div.grid.grid-cols-12
-  div(class="col-span-12 md:col-start-6 md:col-span-6 p-4 mx-auto")
+  div(class="col-span-12 p-4 mx-auto")
     div
       .text-3xl.font-bold
         | Configurações do seu restaurante
@@ -25,6 +25,10 @@ div.grid.grid-cols-12
 import { useRestaurantStore } from '~/store/restaurant'
 import { Loader2 } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
+
+definePageMeta({
+  layout: 'sidebar'
+})
 const restaurantStore = useRestaurantStore()
 
 const loading = ref(false)

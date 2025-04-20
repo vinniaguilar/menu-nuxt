@@ -7,6 +7,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'sidebar'
+})
+
 const search = ref('')
 
 const items = [

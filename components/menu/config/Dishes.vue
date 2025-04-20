@@ -1,7 +1,7 @@
 <template lang="pug">
 div(class="px-4 pr-12")
   div
-    div(class="flex justify-between items-center")
+    div(v-if="categoryTab" class="flex justify-between items-center")
       div
         .text-start.font-medium Pratos
         .text-sm.text-gray-500
@@ -35,6 +35,20 @@ div(class="px-4 pr-12")
                   type="number"
                   placeholder="Preço do prato"
                 )
+                div.mt-6
+                  Label Adicione a imagem do seu prato
+                  Input(
+                    type="file"
+                    placeholder=""
+                    class="mt-1 cursor-pointer"
+                    @input="uploadImage($event)"
+                  )
+                  div.mt-2(v-if="newDish.image")
+                    | Preview da imagem
+                    img(
+                      :src="newDish.image"
+                      class="w-32 h-32 object-cover rounded-md"
+                    )
                 div.mt-6(class="flex items-center space-x-2")
                   Switch(
                     class="cursor-pointer"
@@ -53,6 +67,9 @@ div(class="px-4 pr-12")
                 @click="addDish()"
                 :disabled="!isValidNewDish"
               ) Adicionar
+    div(v-else class="flex justify-center items-center h-64")
+      div(class="text-center")
+        div(class="text-gray-500") Selecione uma categoria para adicionar pratos.
   div
     MenuConfigDish.mt-4(
       v-for="dish in dishes"
@@ -65,6 +82,8 @@ div(class="px-4 pr-12")
 import { ref, computed, watch, toRef } from 'vue'
 import { useMenuStore } from '~/store/menu'
 import { Plus, Trash2 } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
+import { handleUploadFile } from '~/utils/uploader'
 
 const props = defineProps({
   categoryTab: {
@@ -72,6 +91,17 @@ const props = defineProps({
     default: ''
   }
 })
+
+const uploadImage = async (event) => {
+  const result = await handleUploadFile(event)
+  console.log('result', result)
+  if (result) {
+    newDish.value.image = result
+    console.log('newDish.value.image', newDish.value.image)
+  } else {
+    toast.error('Erro ao fazer upload da imagem')
+  }
+}
 
 const dishes = computed(() => {
   const menuStore = useMenuStore()
@@ -95,6 +125,7 @@ watch(
 const newDish = ref({
   name: '',
   description: '',
+  image: '',
   price: 0,
   is_active: true
 })
@@ -117,6 +148,7 @@ const addDish = async () => {
     await menuStore.createDish(payload)
     newDish.value.name = ''
     newDish.value.description = ''
+    newDish.value.image = ''
     newDish.value.price = 0
     newDish.value.is_active = true
   } catch (error) {

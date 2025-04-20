@@ -23,6 +23,10 @@ div.grid.grid-cols-12
 <script setup>
 import { Loader2 } from 'lucide-vue-next'
 import { useRestaurantStore } from '~/store/restaurant'
+
+definePageMeta({
+  layout: 'sidebar'
+})
 const router = useRouter()
 const restaurantStore = useRestaurantStore()
 

@@ -4,4 +4,8 @@
   
   </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({
+  layout: 'sidebar'
+})
+</script>

@@ -2,7 +2,7 @@
 div.grid.grid-cols-12
   div(class="col-span-12 p-4 mx-auto")
     div
-      .text-2xl.font-bold Seu cardápio
+      .text-3xl.font-bold Seu cardápio
       .mt-1.text-sm.text-gray-500
         | Adicione, edite ou remova itens do seu cardápio.
     div.mt-4
@@ -19,4 +19,7 @@ div.grid.grid-cols-12
 
 <script setup>
 const categoryTab = ref(null)
+definePageMeta({
+  layout: 'sidebar'
+})
 </script>
