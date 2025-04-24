@@ -23,12 +23,14 @@ div.grid.grid-cols-12
 <script setup>
 import { Loader2 } from 'lucide-vue-next'
 import { useRestaurantStore } from '~/store/restaurant'
+import { useUserStore } from '~/store/user'
 
 definePageMeta({
   layout: 'sidebar'
 })
 const router = useRouter()
 const restaurantStore = useRestaurantStore()
+const userStore = useUserStore()
 
 const restaurantObj = {
   name: '',
@@ -56,4 +58,8 @@ const createRestaurant = async () => {
 
   loading.value = false
 }
+
+onMounted(() => {
+  console.log('Usuário na store: ', userStore.user)
+})
 </script>

@@ -46,6 +46,13 @@ const handleRegister = async () => {
     password: form.value.password
   })
 
+  await $fetch('/api/user', {
+    method: 'POST',
+    body: {
+      email: form.value.email
+    }
+  })
+
   if (result) {
     router.push('/')
     return

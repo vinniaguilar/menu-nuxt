@@ -1,4 +1,4 @@
-// import { useMenuStore } from './menu'
+import { useUserStore } from './user'
 import { supabase } from '~/utils/supabase'
 import { toast } from 'vue-sonner'
 
@@ -26,7 +26,7 @@ export const useAuthStore = defineStore('auth', {
     },
     async login({ email, password }) {
       console.log('Tentando fazer login com:', email, password)
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { error } = await supabase.auth.signInWithPassword({
         email,
         password
       })
@@ -37,9 +37,20 @@ export const useAuthStore = defineStore('auth', {
         return
       }
 
+      const { data } = await supabase
+        .from('users')
+        .select('*')
+        .eq('email', email)
+        .single()
+
       if (data) {
         console.log('Usuário logado com sucesso:', data)
       }
+
+      const userStore = useUserStore()
+      userStore.setUser(data)
+      userStore.setLoggedIn(true)
+      console.log('Usuário na store: ', userStore.user)
 
       return data
     }
